@@ -40,7 +40,7 @@ export const EntryProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const updateEntry = async (entry: Entry) => {
-    const res = await ax.put<Entry>(`/entry/${entry._id}`, entry);
+    const res = await ax.put<Entry>(`/entries/update?id=${entry._id}`, entry);
     dispatch({ type: '[Entry] update-entry', payload: res.data });
     enqueueSnackbar('Se actualizó correctamente !!', {
       variant: 'success',
@@ -50,7 +50,7 @@ export const EntryProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const deleteEntry = async (id: string) => {
     try {
-      const res = await ax.delete(`/entry/${id}`);
+      const res = await ax.delete(`/entries/delete?id=${id}`);
       dispatch({ type: '[Entry] delete-entry', payload: id });
       enqueueSnackbar('Se eliminó correctamente !!', {
         variant: 'success',
